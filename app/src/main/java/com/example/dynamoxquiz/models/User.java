@@ -1,32 +1,17 @@
 package com.example.dynamoxquiz.models;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "users")
 public class User {
+    @PrimaryKey
+    public int uid;
 
-    private String name;
-    private String nickname;
+    @ColumnInfo(name = "name")
+    public String name;
 
-    public User(String name) {
-        this.name = name;
-    }
-
-    public User(String name, String nickname) {
-        this.name = name;
-        this.nickname = nickname;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
+    @ColumnInfo(name = "nickname")
+    public String nickname;
 }
