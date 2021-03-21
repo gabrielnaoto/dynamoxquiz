@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">DynamoxQuiz</string>
+    <string name="nickname">Apelido</string>
+    <string name="start">Iniciar quiz</string>
+    <string name="error_nickname_taken">Este apelido já está em uso, por favor selecione outro</string>
 </resources>
