@@ -58,9 +58,12 @@ public class QuizController {
 
         activity.setStatementText(question.getStatement());
         activity.setQuestionOptions(question.getOptions());
+        activity.toggleButton(true);
     }
 
     public void checkAnswer(String value) {
+        activity.toggleButton(false);
+
         Answer answer = new Answer(value);
 
         Call<ResponseBody> call = service.checkAnswer(question.getId(), answer);

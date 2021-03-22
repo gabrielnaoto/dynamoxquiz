@@ -44,6 +44,8 @@ public class QuizActivity extends AppCompatActivity {
         button = findViewById(R.id.button);
         group = findViewById(R.id.radioGroup);
 
+        toggleButton(false);
+
         Intent intent = getIntent();
 
         if (intent.hasExtra(EXTRA_USER_ID)) {
@@ -52,6 +54,10 @@ public class QuizActivity extends AppCompatActivity {
             finish();
         }
 
+    }
+
+    public void toggleButton(boolean enabled) {
+        button.setEnabled(enabled);
     }
 
     public void setQuestionOptions(List<String> options) {
