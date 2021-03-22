@@ -13,4 +13,7 @@
     <string name="right_answer_msg">Você acertou!</string>
     <string name="wrong_answer_msg">Você errou!</string>
     <string name="next_question">Próxima pergunta</string>
+    <string name="do_you_want_to_restart">Quer recomeçar o quiz?</string>
+    <string name="continue_playing">Continuar jogando</string>
+    <string name="new_player">Novo jogador</string>
 </resources>

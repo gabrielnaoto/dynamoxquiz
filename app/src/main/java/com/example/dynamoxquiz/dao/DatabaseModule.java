@@ -10,8 +10,6 @@ public class DatabaseModule {
     public static AppDatabase getInstance(Context context) {
         return Room
                 .databaseBuilder(context, AppDatabase.class, DATABASE_NAME)
-                // TODO remember to remove this after database is defined
-                .fallbackToDestructiveMigration()
                 .build();
     }
 }

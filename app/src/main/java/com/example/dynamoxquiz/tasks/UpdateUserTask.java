@@ -9,37 +9,31 @@ import com.example.dynamoxquiz.models.User;
 
 import java.lang.ref.WeakReference;
 
-public class GetUserTask extends AsyncTask<Void, Void, User> {
+public class UpdateUserTask extends AsyncTask<Void, Void, Void> {
 
     private WeakReference<QuizActivity> weakActivity;
     private AppDatabase db;
-    private Integer uid;
+    private User user;
 
-    public GetUserTask(QuizActivity activity, Integer uid) {
+    public UpdateUserTask(QuizActivity activity, User user) {
         this.weakActivity = new WeakReference<QuizActivity>(activity);
         this.db = DatabaseModule.getInstance(weakActivity.get());
-        this.uid = uid;
+        this.user = user;
     }
 
     @Override
-    protected User doInBackground(Void... voids) {
+    protected Void doInBackground(Void... voids) {
         try {
-            return db.userDao().getUserById(this.uid);
+            db.userDao().update(user);
         } catch (Exception e) {
-            return null;
         }
+        return null;
     }
 
     @Override
-    protected void onPostExecute(User user) {
+    protected void onPostExecute(Void aVoid) {
         QuizActivity activity = weakActivity.get();
 
-        if (activity == null) {
-            return;
-        }
-
-        if (user != null) {
-            activity.setUser(user);
-        }
+        activity.finish();
     }
 }

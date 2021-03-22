@@ -1,6 +1,5 @@
 package com.example.dynamoxquiz.tasks;
 
-import android.database.sqlite.SQLiteConstraintException;
 import android.os.AsyncTask;
 import android.widget.Toast;
 

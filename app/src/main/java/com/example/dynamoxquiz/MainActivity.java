@@ -26,5 +26,7 @@ public class MainActivity extends AppCompatActivity {
         String nickname = nicknameInput.getText().toString().trim().toLowerCase();
 
         controller.saveUser(nickname);
+
+        nicknameInput.setText(null);
     }
 }

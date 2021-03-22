@@ -2,12 +2,9 @@ package com.example.dynamoxquiz.tasks;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.database.sqlite.SQLiteConstraintException;
 import android.os.AsyncTask;
-import android.widget.Toast;
 
 import com.example.dynamoxquiz.QuizActivity;
-import com.example.dynamoxquiz.R;
 import com.example.dynamoxquiz.dao.AppDatabase;
 import com.example.dynamoxquiz.dao.DatabaseModule;
 import com.example.dynamoxquiz.models.User;

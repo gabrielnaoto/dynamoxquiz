@@ -12,7 +12,7 @@ import androidx.room.PrimaryKey;
                 parentColumns = "uid",
                 childColumns = "user_id",
                 onDelete = ForeignKey.CASCADE),
-        indices = {@Index(value = {"uid"})})
+        indices = {@Index(value = {"user_id"})})
 public class Quiz {
 
     public Quiz(int userId) {

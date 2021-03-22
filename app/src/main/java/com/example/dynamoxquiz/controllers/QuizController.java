@@ -1,8 +1,5 @@
 package com.example.dynamoxquiz.controllers;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-
 import com.example.dynamoxquiz.QuizActivity;
 import com.example.dynamoxquiz.models.Quiz;
 import com.example.dynamoxquiz.models.User;
@@ -11,15 +8,18 @@ import com.example.dynamoxquiz.services.RetrofitFactory;
 import com.example.dynamoxquiz.services.models.Answer;
 import com.example.dynamoxquiz.services.models.Question;
 import com.example.dynamoxquiz.services.models.ResponseBody;
+import com.example.dynamoxquiz.tasks.CreateNewQuizTask;
 import com.example.dynamoxquiz.tasks.LoadOngoingQuizTask;
 import com.example.dynamoxquiz.tasks.UpdateQuizTask;
-import com.example.dynamoxquiz.R;
+import com.example.dynamoxquiz.tasks.UpdateUserTask;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class QuizController {
+
+    private static final int MAX_QUESTIONS_PER_QUIZ = 10;
 
     private User user;
     private Quiz quiz;
@@ -89,7 +89,12 @@ public class QuizController {
         }
 
         new UpdateQuizTask(activity, quiz).execute();
-        loadQuestion();
+
+        if (quiz.currentQuestion < MAX_QUESTIONS_PER_QUIZ) {
+            loadQuestion();
+        } else {
+            activity.showResultDialog(quiz.score);
+        }
     }
 
     public Quiz getQuiz() {
@@ -114,5 +119,14 @@ public class QuizController {
 
     public Question getQuestion() {
         return question;
+    }
+
+    public void startNewQuiz() {
+        new CreateNewQuizTask(activity, user.uid).execute();
+    }
+
+    public void startNewPlayer() {
+        user.active = false;
+        new UpdateUserTask(activity, user).execute();
     }
 }

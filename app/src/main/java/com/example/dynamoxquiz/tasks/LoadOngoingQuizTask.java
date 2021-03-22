@@ -1,13 +1,11 @@
 package com.example.dynamoxquiz.tasks;
 
-import android.database.sqlite.SQLiteConstraintException;
 import android.os.AsyncTask;
 
 import com.example.dynamoxquiz.QuizActivity;
 import com.example.dynamoxquiz.dao.AppDatabase;
 import com.example.dynamoxquiz.dao.DatabaseModule;
 import com.example.dynamoxquiz.models.Quiz;
-import com.example.dynamoxquiz.models.User;
 
 import java.lang.ref.WeakReference;
 

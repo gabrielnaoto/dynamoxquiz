@@ -114,4 +114,21 @@ public class QuizActivity extends AppCompatActivity {
             })
             .show();
     }
+
+    public void showResultDialog(int score) {
+        new AlertDialog.Builder(this)
+            .setTitle(String.format("Sua pontuação foi: %s", score))
+            .setMessage(R.string.do_you_want_to_restart)
+            .setPositiveButton(R.string.continue_playing, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    quizController.startNewQuiz();
+                }
+            })
+            .setNegativeButton(R.string.new_player, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    quizController.startNewPlayer();
+                }
+            })
+            .show();
+    }
 }
