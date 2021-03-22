@@ -18,13 +18,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         nicknameInput = findViewById(R.id.nicknameInput);
-        controller = new UserController();
-        controller.loadActiveUser(this);
+        controller = new UserController(this);
+        controller.loadActiveUser();
     }
 
     public void onClick(View v) {
         String nickname = nicknameInput.getText().toString().trim();
 
-        controller.saveUser(this, nickname);
+        controller.saveUser(nickname);
     }
 }

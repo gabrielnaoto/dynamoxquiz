@@ -10,11 +10,26 @@ public class QuizController {
 
     private User user;
     private Quiz quiz;
+    private Activity activity;
 
-    public QuizController() {
+    public QuizController(Activity activity, User user) {
+        this.user = user;
+        this.activity = activity;
     }
 
-    public void startQuiz(Activity activity, User user) {
+    public void start() {
 
+    }
+
+    public void next() {
+
+    }
+
+    public Quiz getQuiz() {
+        return quiz;
+    }
+
+    public void setQuiz(Quiz quiz) {
+        this.quiz = quiz;
     }
 }

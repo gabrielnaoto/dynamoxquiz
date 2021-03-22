@@ -4,30 +4,30 @@ import android.app.Activity;
 import android.content.Intent;
 import android.database.sqlite.SQLiteConstraintException;
 import android.os.AsyncTask;
-import android.widget.Toast;
 
 import com.example.dynamoxquiz.QuizActivity;
-import com.example.dynamoxquiz.R;
 import com.example.dynamoxquiz.dao.AppDatabase;
 import com.example.dynamoxquiz.dao.DatabaseModule;
 import com.example.dynamoxquiz.models.User;
 
 import java.lang.ref.WeakReference;
 
-public class LoadActiveUserTask extends AsyncTask<Void, Void, User> {
+public class GetUserTask extends AsyncTask<Void, Void, User> {
 
-    private WeakReference<Activity> weakActivity;
+    private WeakReference<QuizActivity> weakActivity;
     private AppDatabase db;
+    private Integer uid;
 
-    public LoadActiveUserTask(Activity activity) {
-        this.weakActivity = new WeakReference<>(activity);
+    public GetUserTask(QuizActivity activity, Integer uid) {
+        this.weakActivity = new WeakReference<QuizActivity>(activity);
         this.db = DatabaseModule.getInstance(weakActivity.get());
+        this.uid = uid;
     }
 
     @Override
     protected User doInBackground(Void... voids) {
         try {
-            return db.userDao().getActiveUser();
+            return db.userDao().getUserById(this.uid);
         } catch (SQLiteConstraintException e) {
             return null;
         }
@@ -35,16 +35,14 @@ public class LoadActiveUserTask extends AsyncTask<Void, Void, User> {
 
     @Override
     protected void onPostExecute(User user) {
-        Activity activity = weakActivity.get();
+        QuizActivity activity = weakActivity.get();
 
         if (activity == null) {
             return;
         }
 
         if (user != null) {
-            Intent intent = new Intent(activity, QuizActivity.class);
-            intent.putExtra(QuizActivity.EXTRA_USER_ID, user.uid);
-            activity.startActivity(intent);
+            activity.setUser(user);
         }
     }
 }
