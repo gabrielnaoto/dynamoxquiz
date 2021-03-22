@@ -2,12 +2,15 @@ package com.example.dynamoxquiz;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.dynamoxquiz.controllers.QuizController;
 import com.example.dynamoxquiz.controllers.UserController;
+import com.example.dynamoxquiz.models.Quiz;
 import com.example.dynamoxquiz.models.User;
 
 public class QuizActivity extends AppCompatActivity {
@@ -17,12 +20,20 @@ public class QuizActivity extends AppCompatActivity {
     private UserController userController;
     private QuizController quizController;
 
+    private TextView userText;
+    private TextView questionText;
+    private Button button;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
         userController = new UserController(this);
+
+        userText = findViewById(R.id.userText);
+        questionText = findViewById(R.id.questionText);
+        button = findViewById(R.id.button);
 
         Intent intent = getIntent();
 
@@ -34,7 +45,25 @@ public class QuizActivity extends AppCompatActivity {
 
     }
 
+    public void setUserText(String text) {
+        userText.setText(text);
+    }
+
+    public void setQuestionText(String text) {
+        questionText.setText(text);
+    }
+
+    public void onClick(View v) {
+        quizController.nextQuestion();
+    }
+
     public void setUser(User user) {
         quizController = new QuizController(this, user);
+
+        setUserText(user.nickname);
+    }
+
+    public void setQuiz(Quiz quiz) {
+        quizController.setQuiz(quiz);
     }
 }

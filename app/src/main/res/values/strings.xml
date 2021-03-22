@@ -4,6 +4,7 @@
     <string name="start">Iniciar quiz</string>
     <string name="error_nickname_taken">Este apelido já está em uso, por favor selecione outro</string>
     <string name="title_activity_quiz">QuizActivity</string>
+    <string name="error_starting_quiz">Falha ao iniciar quiz</string>
     <!--
     This string is used for square devices and overridden by hello_world in
     values-round/strings.xml for round devices.

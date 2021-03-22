@@ -15,6 +15,12 @@ import androidx.room.PrimaryKey;
         indices = {@Index(value = {"uid"})})
 public class Quiz {
 
+    public Quiz(int userId) {
+        this.userId = userId;
+        this.currentQuestion = 1;
+        this.score = 0;
+    }
+
     @PrimaryKey(autoGenerate = true)
     public int uid;
 

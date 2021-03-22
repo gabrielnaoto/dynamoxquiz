@@ -28,7 +28,7 @@ public class LoadActiveUserTask extends AsyncTask<Void, Void, User> {
     protected User doInBackground(Void... voids) {
         try {
             return db.userDao().getActiveUser();
-        } catch (SQLiteConstraintException e) {
+        } catch (Exception e) {
             return null;
         }
     }
