@@ -21,7 +21,6 @@ public class QuizActivity extends AppCompatActivity {
     private QuizController quizController;
 
     private TextView userText;
-    private TextView questionText;
     private Button button;
 
     @Override
@@ -32,7 +31,6 @@ public class QuizActivity extends AppCompatActivity {
         userController = new UserController(this);
 
         userText = findViewById(R.id.userText);
-        questionText = findViewById(R.id.questionText);
         button = findViewById(R.id.button);
 
         Intent intent = getIntent();
@@ -46,11 +44,11 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     public void setUserText(String text) {
-        userText.setText(text);
+        userText.setText(String.format("Olá, %s", text));
     }
 
     public void setQuestionText(String text) {
-        questionText.setText(text);
+        setTitle(String.format("Pergunta %s", text));
     }
 
     public void onClick(View v) {

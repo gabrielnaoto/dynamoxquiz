@@ -3,11 +3,7 @@
     <string name="nickname">Apelido</string>
     <string name="start">Iniciar quiz</string>
     <string name="error_nickname_taken">Este apelido já está em uso, por favor selecione outro</string>
-    <string name="title_activity_quiz">QuizActivity</string>
+    <string name="title_activity_quiz">Quiz</string>
     <string name="error_starting_quiz">Falha ao iniciar quiz</string>
-    <!--
-    This string is used for square devices and overridden by hello_world in
-    values-round/strings.xml for round devices.
-    -->
-    <string name="hello_world">Hello Square World!</string>
+    <string name="confirm_button">Confirmar</string>
 </resources>
