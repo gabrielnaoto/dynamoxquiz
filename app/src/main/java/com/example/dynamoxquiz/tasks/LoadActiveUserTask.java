@@ -14,22 +14,22 @@ import com.example.dynamoxquiz.models.User;
 
 import java.lang.ref.WeakReference;
 
-public class InsertUserTask extends AsyncTask<Void, Void, Integer> {
+public class LoadActiveUserTask extends AsyncTask<Void, Void, Integer> {
 
     private WeakReference<Activity> weakActivity;
     private AppDatabase db;
     private User user;
 
-    public InsertUserTask(Activity activity, User user) {
+    public LoadActiveUserTask(Activity activity) {
         this.weakActivity = new WeakReference<>(activity);
         this.db = DatabaseModule.getInstance(weakActivity.get());
-        this.user = user;
     }
 
     @Override
     protected Integer doInBackground(Void... voids) {
         try {
-            return (int) (long) db.userDao().insert(this.user);
+            user = db.userDao().getActiveUser();
+            return 1;
         } catch (SQLiteConstraintException e) {
             return -1;
         }
@@ -43,11 +43,9 @@ public class InsertUserTask extends AsyncTask<Void, Void, Integer> {
             return;
         }
 
-        if (id < 0) {
-            Toast.makeText(activity, activity.getResources().getString(R.string.error_nickname_taken), Toast.LENGTH_LONG).show();
-        } else {
+        if (id > 0) {
             Intent intent = new Intent(activity, QuizActivity.class);
-            intent.putExtra(QuizActivity.EXTRA_USER_ID, id);
+            intent.putExtra(QuizActivity.EXTRA_USER_ID, user.uid);
             activity.startActivity(intent);
         }
     }

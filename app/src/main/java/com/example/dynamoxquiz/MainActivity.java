@@ -11,18 +11,20 @@ import com.google.android.material.textfield.TextInputEditText;
 public class MainActivity extends AppCompatActivity {
 
     private UserController controller;
+    private TextInputEditText nicknameInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        nicknameInput = findViewById(R.id.nicknameInput);
         controller = new UserController();
+        controller.loadActiveUser(this);
     }
 
     public void onClick(View v) {
-        TextInputEditText nicknameInput = findViewById(R.id.nicknameInput);
         String nickname = nicknameInput.getText().toString().trim();
 
-        controller.startQuiz(this, nickname);
+        controller.saveUser(this, nickname);
     }
 }

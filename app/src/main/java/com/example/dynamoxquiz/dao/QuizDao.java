@@ -7,18 +7,17 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.example.dynamoxquiz.models.Quiz;
-import com.example.dynamoxquiz.models.User;
 
 @Dao
 public interface QuizDao {
-    @Query("SELECT * FROM quizzes WHERE user_id = :userId ORDER BY uid DESC LIMIT 1")
-    Quiz getLast(int userId);
+    @Query("SELECT * FROM quizzes WHERE user_id = :userId AND current_question < 10 ORDER BY uid DESC LIMIT 1")
+    Quiz getOngoingQuiz(int userId);
 
     @Query("SELECT * FROM quizzes WHERE uid = :id")
     Quiz getQuizById(int id);
 
     @Insert
-    void insert(Quiz quiz);
+    long insert(Quiz quiz);
 
     @Update
     void update(Quiz quiz);

@@ -24,7 +24,7 @@ public interface UserDao {
     User getActiveUser();
 
     @Insert
-    void insertAll(User... users);
+    long insert(User user);
 
     @Delete
     void delete(User user);

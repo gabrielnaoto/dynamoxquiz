@@ -3,13 +3,16 @@ package com.example.dynamoxquiz.models;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 
-@Entity(tableName = "quizzes", foreignKeys = @ForeignKey(entity = User.class,
-        parentColumns = "uid",
-        childColumns = "user_id",
-        onDelete = ForeignKey.CASCADE))
+@Entity(tableName = "quizzes",
+        foreignKeys = @ForeignKey(entity = User.class,
+                parentColumns = "uid",
+                childColumns = "user_id",
+                onDelete = ForeignKey.CASCADE),
+        indices = {@Index(value = {"uid"})})
 public class Quiz {
 
     @PrimaryKey(autoGenerate = true)
