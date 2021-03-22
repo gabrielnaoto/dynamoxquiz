@@ -20,6 +20,9 @@ public interface UserDao {
     @Query("SELECT * FROM users WHERE uid IN (:userIds)")
     List<User> loadAllByIds(int[] userIds);
 
+    @Query("SELECT * FROM users WHERE active = '1' ORDER BY uid LIMIT 1")
+    User getActiveUser();
+
     @Insert
     void insertAll(User... users);
 

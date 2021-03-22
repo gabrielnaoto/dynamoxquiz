@@ -9,6 +9,7 @@ import androidx.room.PrimaryKey;
 public class User {
     public User(String nickname) {
         this.nickname = nickname;
+        this.active = true;
     }
 
     @PrimaryKey(autoGenerate = true)
@@ -16,4 +17,7 @@ public class User {
 
     @ColumnInfo(name = "nickname")
     public String nickname;
+
+    @ColumnInfo(name = "active", defaultValue = "true")
+    public boolean active;
 }
