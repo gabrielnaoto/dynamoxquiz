@@ -6,4 +6,5 @@
     <string name="title_activity_quiz">Quiz</string>
     <string name="error_starting_quiz">Falha ao iniciar quiz</string>
     <string name="confirm_button">Confirmar</string>
+    <string name="error_loading_question">Falha ao carregar pergunta</string>
 </resources>

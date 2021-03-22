@@ -11,16 +11,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:text="TextView"
         android:textColor="@color/purple_700"
-        android:textSize="18sp"
+        android:textSize="24sp"
         android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/statementText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:textSize="18sp" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:onClick="onClick"
-        android:text="@string/confirm_button"/>
+        android:text="@string/confirm_button" />
 
 </LinearLayout>
