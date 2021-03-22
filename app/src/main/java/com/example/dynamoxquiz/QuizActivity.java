@@ -56,6 +56,7 @@ public class QuizActivity extends AppCompatActivity {
 
     public void setQuestionOptions(List<String> options) {
         group.removeAllViews();
+        group.clearCheck();
 
         int index = 0;
 
@@ -86,7 +87,7 @@ public class QuizActivity extends AppCompatActivity {
             String value = ((RadioButton) findViewById(id)).getText().toString();
             quizController.checkAnswer(value);
         } else {
-            Toast.makeText(this, getString(R.string.error_missing_answer), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.error_missing_answer), Toast.LENGTH_SHORT).show();
         }
     }
 
