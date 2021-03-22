@@ -9,7 +9,6 @@ import android.widget.Toast;
 import com.example.dynamoxquiz.QuizActivity;
 import com.example.dynamoxquiz.R;
 import com.example.dynamoxquiz.dao.AppDatabase;
-import com.example.dynamoxquiz.dao.DatabaseModule;
 import com.example.dynamoxquiz.models.User;
 
 import java.lang.ref.WeakReference;
@@ -22,7 +21,7 @@ public class InsertUserTask extends AsyncTask<Void, Void, Integer> {
 
     public InsertUserTask(Activity activity, User user) {
         this.weakActivity = new WeakReference<>(activity);
-        this.db = DatabaseModule.getInstance(weakActivity.get());
+        this.db = AppDatabase.getInstance(weakActivity.get());
         this.user = user;
     }
 
