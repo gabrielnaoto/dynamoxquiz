@@ -1,24 +1,20 @@
 package com.example.dynamoxquiz.controllers;
 
-import android.app.Activity;
-import android.widget.Toast;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 
 import com.example.dynamoxquiz.QuizActivity;
-import com.example.dynamoxquiz.R;
 import com.example.dynamoxquiz.models.Quiz;
 import com.example.dynamoxquiz.models.User;
 import com.example.dynamoxquiz.services.ApiService;
 import com.example.dynamoxquiz.services.RetrofitFactory;
+import com.example.dynamoxquiz.services.models.Answer;
 import com.example.dynamoxquiz.services.models.Question;
-import com.example.dynamoxquiz.tasks.CreateNewQuizTask;
-import com.example.dynamoxquiz.tasks.InsertUserTask;
+import com.example.dynamoxquiz.services.models.ResponseBody;
 import com.example.dynamoxquiz.tasks.LoadOngoingQuizTask;
 import com.example.dynamoxquiz.tasks.UpdateQuizTask;
+import com.example.dynamoxquiz.R;
 
-import io.reactivex.Single;
-import io.reactivex.SingleObserver;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.disposables.Disposable;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -48,7 +44,6 @@ public class QuizController {
                 if (response.isSuccessful()) {
                     setQuestion(response.body());
                 }
-
             }
 
             @Override
@@ -65,10 +60,36 @@ public class QuizController {
         activity.setQuestionOptions(question.getOptions());
     }
 
-    public void nextQuestion () {
+    public void checkAnswer(String value) {
+        Answer answer = new Answer(value);
+
+        Call<ResponseBody> call = service.checkAnswer(question.getId(), answer);
+
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    activity.showNextQuestionDialog(response.body().isResult());
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                call.cancel();
+            }
+        });
+    }
+
+    public void nextQuestion (boolean isRight) {
         quiz.currentQuestion += 1;
 
+        if (isRight) {
+            quiz.score += 1;
+        }
+
         new UpdateQuizTask(activity, quiz).execute();
+        loadQuestion();
     }
 
     public Quiz getQuiz() {
@@ -89,5 +110,9 @@ public class QuizController {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Question getQuestion() {
+        return question;
     }
 }

@@ -1,5 +1,7 @@
 package com.example.dynamoxquiz;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -7,6 +9,7 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -52,6 +55,8 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     public void setQuestionOptions(List<String> options) {
+        group.removeAllViews();
+
         int index = 0;
 
         for (String option: options) {
@@ -75,7 +80,14 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     public void onClick(View v) {
-        quizController.nextQuestion();
+        int id = group.getCheckedRadioButtonId();
+
+        if (id != -1) {
+            String value = ((RadioButton) findViewById(id)).getText().toString();
+            quizController.checkAnswer(value);
+        } else {
+            Toast.makeText(this, getString(R.string.error_missing_answer), Toast.LENGTH_LONG).show();
+        }
     }
 
     public void setUser(User user) {
@@ -86,5 +98,20 @@ public class QuizActivity extends AppCompatActivity {
 
     public void setQuiz(Quiz quiz) {
         quizController.setQuiz(quiz);
+    }
+
+    public void showNextQuestionDialog(boolean isRight) {
+        int title = isRight ? R.string.right_answer : R.string.wrong_answer;
+        int message = isRight ? R.string.right_answer_msg : R.string.wrong_answer_msg;
+
+        new AlertDialog.Builder(this)
+            .setTitle(title)
+            .setMessage(message)
+            .setPositiveButton(R.string.next_question, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    quizController.nextQuestion(isRight);
+                }
+            })
+            .show();
     }
 }

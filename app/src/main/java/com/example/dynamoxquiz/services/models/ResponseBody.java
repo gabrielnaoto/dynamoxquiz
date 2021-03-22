@@ -3,13 +3,13 @@ package com.example.dynamoxquiz.services.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Response {
+public class ResponseBody {
 
     @Expose
     @SerializedName("result")
     private boolean result;
 
-    public Response(boolean result) {
+    public ResponseBody(boolean result) {
         this.result = result;
     }
 

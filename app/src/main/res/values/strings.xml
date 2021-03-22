@@ -7,4 +7,10 @@
     <string name="error_starting_quiz">Falha ao iniciar quiz</string>
     <string name="confirm_button">Confirmar</string>
     <string name="error_loading_question">Falha ao carregar pergunta</string>
+    <string name="error_missing_answer">É necessário selecionar uma opção para continuar</string>
+    <string name="right_answer">Parabéns</string>
+    <string name="wrong_answer">Ah que pena...</string>
+    <string name="right_answer_msg">Você acertou!</string>
+    <string name="wrong_answer_msg">Você errou!</string>
+    <string name="next_question">Próxima pergunta</string>
 </resources>
