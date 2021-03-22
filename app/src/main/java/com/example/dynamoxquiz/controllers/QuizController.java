@@ -93,7 +93,7 @@ public class QuizController {
 
         new UpdateQuizTask(activity, quiz).execute();
 
-        if (quiz.currentQuestion < MAX_QUESTIONS_PER_QUIZ) {
+        if (quiz.currentQuestion <= MAX_QUESTIONS_PER_QUIZ) {
             loadQuestion();
         } else {
             activity.showResultDialog(quiz.score);
